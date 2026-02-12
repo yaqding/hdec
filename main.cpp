@@ -126,7 +126,7 @@ int main() {
                               end_time - start_time)
                               .count());
 
-    for (int k = 0; k < solutions; k=k+2)
+    for (int k = 0; k < solutions; ++k)
       {
         Eigen::Matrix3d Re;
         Eigen::Vector3d Te;
@@ -145,18 +145,20 @@ int main() {
     double tmp_r_svd[2];
     double tmp_r_cv[2];
     double tmp_t_ding[2];
-    double tmp_t_malis[4];
+    double tmp_t_malis[2];
     double tmp_t_svd[2];
     double tmp_t_cv[2];
+    int idx[2] = {0, 3};
     for (int k = 0; k < 2; ++k) {
-      tmp_r_ding[k] = rot_error(Rest_ding[k], Rgt);
-      tmp_r_malis[k] = rot_error(Rest_malis[k], Rgt);
-      tmp_r_svd[k] = rot_error(Rest_svd[k], Rgt);
-      tmp_r_cv[k] = rot_error(Rest_cv[k], Rgt);
-      tmp_t_ding[k] = t_error(Test_ding[k], Tg);
-      tmp_t_malis[k] = t_error(Test_malis[k], Tg);
-      tmp_t_svd[k] = t_error(Test_svd[k], Tg);
-      tmp_t_cv[k] = t_error(Test_cv[k], Tg);
+      int real_k = idx[k];
+      tmp_r_ding[k] = rot_error(Rest_ding[real_k], Rgt);
+      tmp_r_malis[k] = rot_error(Rest_malis[real_k], Rgt);
+      tmp_r_svd[k] = rot_error(Rest_svd[real_k], Rgt);
+      tmp_r_cv[k] = rot_error(Rest_cv[real_k], Rgt);
+      tmp_t_ding[k] = t_error(Test_ding[real_k], Tg);
+      tmp_t_malis[k] = t_error(Test_malis[real_k], Tg);
+      tmp_t_svd[k] = t_error(Test_svd[real_k], Tg);
+      tmp_t_cv[k] = t_error(Test_cv[real_k], Tg);
     }
 
     error_ding(i, 0) = std::min(tmp_r_ding[0], tmp_r_ding[1]);

@@ -157,6 +157,10 @@ void hdecom_malis(Eigen::Matrix3d &HH, std::vector<Eigen::Matrix3d> &Rest,
     Test.push_back(ta);
     Nest.push_back(na);
 
+    Rest.push_back(Ra);
+    Test.push_back(-ta);
+    Nest.push_back(-na);
+
     // Rb, tb, nb
     findRmatFrom_tstar_n(tb_star, H, nb, v, Rb);
     tb = Rb * tb_star;
@@ -164,6 +168,10 @@ void hdecom_malis(Eigen::Matrix3d &HH, std::vector<Eigen::Matrix3d> &Rest,
     Rest.push_back(Rb);
     Test.push_back(tb);
     Nest.push_back(na);
+
+    Rest.push_back(Rb);
+    Test.push_back(-tb);
+    Nest.push_back(-na);
 
   } else {
     hdecom_svd(HH, Rest, Test, Nest);

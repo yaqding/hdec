@@ -61,25 +61,26 @@ void hdecom_svd(Eigen::Matrix3d &HH, std::vector<Eigen::Matrix3d> &Rest, std::ve
 
   Eigen::Vector3d n1 = v2.cross(u1);
   
-  if (n1(2) < 0)
-  {
-    n1 = -n1;
-  }
   Eigen::Vector3d t1 = (H2 - R1) * n1;
 
   Eigen::Vector3d n2 = v2.cross(u2);
   
-  if (n2(2) < 0)
-  {
-    n2 = -n2;
-  }
   Eigen::Vector3d t2 = (H2 - R2) * n2;
 
   Rest.push_back(R1);
-  Rest.push_back(R2);
   Test.push_back(t1);
-  Test.push_back(t2);
   Nest.push_back(n1);
+
+  Rest.push_back(R1);
+  Test.push_back(-t1);
+  Nest.push_back(-n1);
+
+  Rest.push_back(R2);
+  Test.push_back(t2);
   Nest.push_back(n2);
+
+  Rest.push_back(R2);
+  Test.push_back(-t2);
+  Nest.push_back(-n2);
   
 }

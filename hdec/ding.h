@@ -291,12 +291,13 @@ void hdecom_ding(Eigen::Matrix3d &HH, std::vector<Eigen::Matrix3d> &Rest,
         n = Rrand.transpose() * n;
       }
 
-      if (n(2) < 0)
-        n = -n;
-
       Rest.push_back(R);
       Test.push_back(t);
       Nest.push_back(n);
+
+      Rest.push_back(R);
+      Test.push_back(-t);
+      Nest.push_back(-n);
     }
 
   } else {
